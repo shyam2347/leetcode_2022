@@ -22,3 +22,25 @@ public:
         return output;
     }
 };
+
+// Version 2
+class Solution2 {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int string_length = s.size();
+        int map[256]; // Map of char to index
+        std::fill_n(map, 256, -1);
+        int start_index = 0;
+        int result = 0;
+        for (int i = 0; i < string_length; i++) {
+          if (map[s[i]] != -1 && map[s[i]] >= start_index) {
+            start_index = map[s[i]] + 1;
+          }
+          map[s[i]] = i;
+          if (i - start_index + 1 > result) {
+            result = i - start_index + 1;
+          }
+        }
+        return result;
+    }
+};
